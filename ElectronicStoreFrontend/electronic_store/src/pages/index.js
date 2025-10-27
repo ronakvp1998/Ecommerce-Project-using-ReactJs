@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import Base from "../components/Base";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 function Index() {
   function showSuccessToast() {
     toast.success("This is a success toast!", {
@@ -8,6 +9,36 @@ function Index() {
       theme: "dark",
     });
   }
+
+  const getDataFromServer = () => {
+    toast.info("Fetching data from server...", {
+      position: "bottom-center",
+      theme: "dark",
+    });
+
+    axios
+      .get(
+        "http://localhost:9090/users?sortBy=name&sortDir=desc&pageNumber=1&pageSize=10"
+      )
+      .then((response) => {
+        console.log("Data from server:", response.data);
+        toast.success("Data fetched successfully!", {
+          position: "bottom-center",
+          theme: "dark",
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        toast.error("Failed to fetch data from server.", {
+          position: "bottom-center",
+          theme: "dark",
+        });
+      })
+      .finally(() => {
+        toast.dismiss(); // Dismiss the info toast
+      });
+  };
+
   return (
     <Base
       title="Show what you need"
@@ -39,6 +70,9 @@ function Index() {
       </p>
       <Button variant="success" onClick={showSuccessToast}>
         Tostify Success
+      </Button>
+      <Button variant="primary" onClick={getDataFromServer}>
+        Get data from fake API
       </Button>
     </Base>
   );
