@@ -1,5 +1,13 @@
+import { toast } from "react-toastify";
 import Base from "../components/Base";
+import { Button } from "react-bootstrap";
 function Index() {
+  function showSuccessToast() {
+    toast.success("This is a success toast!", {
+      position: "bottom-center",
+      theme: "dark",
+    });
+  }
   return (
     <Base
       title="Show what you need"
@@ -29,6 +37,9 @@ function Index() {
         years, sometimes by accident, sometimes on purpose (injected humour and
         the like).
       </p>
+      <Button variant="success" onClick={showSuccessToast}>
+        Tostify Success
+      </Button>
     </Base>
   );
 }

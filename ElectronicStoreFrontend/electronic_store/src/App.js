@@ -8,12 +8,14 @@ import Profile from "./pages/users/profile";
 import AboutUser from "./pages/users/AboutUser";
 import CustomNavbar from "./components/Navbar";
 import Contact from "./pages/contact";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     // setting up
 
     <BrowserRouter>
+      <ToastContainer position="bottom-center" theme="light" />
       <CustomNavbar />
       <Routes>
         <Route path="/" element={<Index />}></Route>
