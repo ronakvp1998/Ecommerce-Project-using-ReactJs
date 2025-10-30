@@ -38,6 +38,10 @@ const Register = () => {
       about: "",
       gender: "",
     });
+    setErrorData({
+      isError: false,
+      errorData: null,
+    });
   };
 
   const submitForm = (event) => {
@@ -75,6 +79,10 @@ const Register = () => {
       })
       .catch((error) => {
         console.log(error);
+        setErrorData({
+          isError: true,
+          errorData: error,
+        });
         toast.error("Something went wrong in registration");
       });
   };
@@ -102,7 +110,7 @@ const Register = () => {
                 <h3 className="mb-4 text-center text-uppercase">
                   Store Signup Here
                 </h3>
-                <Form onSubmit={submitForm}>
+                <Form noValidate onSubmit={submitForm}>
                   {/* name field */}
                   <Form.Group className="mb-2" controlId="formName">
                     <Form.Label>Enter your name</Form.Label>
@@ -111,7 +119,11 @@ const Register = () => {
                       placeholder="Enter name"
                       onChange={(event) => handleChange(event, "name")}
                       value={data.name}
+                      isInvalid={errorData.errorData?.response?.data?.name}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errorData.errorData?.response?.data?.name}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   {/* email field */}
                   <Form.Group className="mb-2" controlId="formEmail">
@@ -121,7 +133,11 @@ const Register = () => {
                       placeholder="Enter email"
                       onChange={(event) => handleChange(event, "email")}
                       value={data.email}
+                      isInvalid={errorData.errorData?.response?.data?.email}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errorData.errorData?.response?.data?.email}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   {/* password field */}
                   <Form.Group className="mb-2" controlId="formPassword">
@@ -131,7 +147,11 @@ const Register = () => {
                       placeholder="Enter new password"
                       onChange={(event) => handleChange(event, "password")}
                       value={data.password}
+                      isInvalid={errorData.errorData?.response?.data?.password}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errorData.errorData?.response?.data?.password}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group className="mb-2" controlId="formConfirmPassword">
                     <Form.Label>Re Enter your Password</Form.Label>
@@ -177,7 +197,11 @@ const Register = () => {
                       placeholder="write here"
                       onChange={(event) => handleChange(event, "about")}
                       value={data.about}
+                      isInvalid={errorData.errorData?.response?.data?.about}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errorData.errorData?.response?.data?.about}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Container className="text-center">
                     <p className="text-center">

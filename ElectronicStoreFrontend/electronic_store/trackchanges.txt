@@ -2,3 +2,7 @@ Call API to register users | client side validation
 create BASE_URL, configure the Axios for public and private api calls, create the AXIOS api function for users, updated the onSubmit for the form
 validating the data one's the data is validated we submit the user data using submitForm method
 user was able to register successfully using the frontend signup page
+
+
+Error Handling at frontend | showing proper messages
+use isInvalid={true} this will highlight the text box in red color
