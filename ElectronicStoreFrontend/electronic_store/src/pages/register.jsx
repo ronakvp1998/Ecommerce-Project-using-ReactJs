@@ -4,6 +4,8 @@ import { Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { registerUser } from "../services/user.service";
 const Register = () => {
   let [data, setData] = useState({
     name: "",
@@ -38,6 +40,45 @@ const Register = () => {
     });
   };
 
+  const submitForm = (event) => {
+    event.preventDefault();
+    console.log(data);
+    // validate client side
+    if (data.name == undefined || data.name.trim() === "") {
+      toast.error("Name is required");
+      return;
+    }
+    if (data.email == undefined || data.email.trim() === "") {
+      toast.error("Email is required");
+      return;
+    }
+    // basic checks
+    if (data.password == undefined || data.password.trim() === "") {
+      toast.error("Password is required");
+      return;
+    }
+    if (data.password != data.confirmPassword) {
+      toast.error("Password and Confirm Password does not match");
+      return;
+    }
+    if (data.gender == undefined || data.gender === "") {
+      toast.error("Gender is required");
+      return;
+    }
+    // submit the data to server
+    registerUser(data)
+      .then((userData) => {
+        console.log("submitting data to server " + userData);
+        toast.success(
+          "User is registered successfully with email " + userData.email
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Something went wrong in registration");
+      });
+  };
+
   const RegisterForm = () => {
     return (
       <Container>
@@ -61,7 +102,7 @@ const Register = () => {
                 <h3 className="mb-4 text-center text-uppercase">
                   Store Signup Here
                 </h3>
-                <Form>
+                <Form onSubmit={submitForm}>
                   {/* name field */}
                   <Form.Group className="mb-2" controlId="formName">
                     <Form.Label>Enter your name</Form.Label>
@@ -138,24 +179,28 @@ const Register = () => {
                       value={data.about}
                     />
                   </Form.Group>
+                  <Container className="text-center">
+                    <p className="text-center">
+                      Already register ! <a href="/login">Login Here</a>
+                    </p>
+                  </Container>
+                  <Container className="text-center">
+                    <Button
+                      type="submit"
+                      className="text-uppercase"
+                      variant="success"
+                    >
+                      Register
+                    </Button>
+                    <Button
+                      className="ms-2 text-uppercase"
+                      variant="danger"
+                      onClick={clearData}
+                    >
+                      Reset
+                    </Button>
+                  </Container>
                 </Form>
-                <Container className="text-center">
-                  <p className="text-center">
-                    Already register ! <a href="/login">Login Here</a>
-                  </p>
-                </Container>
-                <Container className="text-center">
-                  <Button className="text-uppercase" variant="success">
-                    Register
-                  </Button>
-                  <Button
-                    className="ms-2 text-uppercase"
-                    variant="danger"
-                    onClick={clearData}
-                  >
-                    Reset
-                  </Button>
-                </Container>
               </Card.Body>
             </Card>
           </Col>
