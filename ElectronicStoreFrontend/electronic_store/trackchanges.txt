@@ -6,3 +6,6 @@ user was able to register successfully using the frontend signup page
 
 Error Handling at frontend | showing proper messages
 use isInvalid={true} this will highlight the text box in red color
+
+
+creating loading spinner while registering

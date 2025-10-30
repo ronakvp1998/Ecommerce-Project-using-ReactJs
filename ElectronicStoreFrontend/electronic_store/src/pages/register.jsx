@@ -1,7 +1,13 @@
 import Base from "../components/Base";
-import { Container, Row, Col, Form } from "react-bootstrap";
-import { Card } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Card,
+  Spinner,
+  Button,
+} from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -20,6 +26,8 @@ const Register = () => {
     isError: false,
     errorData: null,
   });
+
+  const [loading, setLoading] = useState(false);
 
   // handle change function
   const handleChange = (event, property) => {
@@ -76,6 +84,7 @@ const Register = () => {
         toast.success(
           "User is registered successfully with email " + userData.email
         );
+        clearData();
       })
       .catch((error) => {
         console.log(error);
@@ -84,6 +93,9 @@ const Register = () => {
           errorData: error,
         });
         toast.error("Something went wrong in registration");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -213,8 +225,16 @@ const Register = () => {
                       type="submit"
                       className="text-uppercase"
                       variant="success"
+                      disabled={loading}
                     >
-                      Register
+                      <Spinner
+                        animation="grow"
+                        size="sm"
+                        className="me-2"
+                        hidden={!loading}
+                      />
+                      <span hidden={!loading}>wait...</span>
+                      <span hidden={loading}>Register</span>
                     </Button>
                     <Button
                       className="ms-2 text-uppercase"
