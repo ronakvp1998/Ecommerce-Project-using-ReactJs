@@ -15,3 +15,7 @@ login form | create login form step by step
 implemeted login page
 forget password page needs to be implemented
 login page UI created data binding is still pending 
+
+
+Handling login data with reactjs | Server call for login
+added valition for login and make an api call to validate the username and password
