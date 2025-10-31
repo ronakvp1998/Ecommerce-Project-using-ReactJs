@@ -108,12 +108,10 @@ const Register = () => {
           <Col sm={{ span: 8, offset: 2 }}>
             <Card
               className="my-2 border-0 shadow-lg p-4"
-              style={
-                {
-                  // position: "relative",
-                  // top: -30,
-                }
-              }
+              style={{
+                position: "relative",
+                top: -30,
+              }}
             >
               <Card.Body>
                 <Container className="text-center mb-2 ">

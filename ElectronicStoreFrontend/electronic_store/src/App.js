@@ -11,6 +11,7 @@ import Contact from "./pages/contact";
 import { ToastContainer } from "react-toastify";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import ForgetPassword from "./pages/forgetPassword";
 function App() {
   return (
     // setting up
@@ -26,6 +27,7 @@ function App() {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/forget" element={<ForgetPassword />}></Route>
         <Route path="/users" element={<Dashboard />}>
           <Route path="profile" element={<Profile />}></Route>
           <Route path="about" element={<AboutUser />}></Route>

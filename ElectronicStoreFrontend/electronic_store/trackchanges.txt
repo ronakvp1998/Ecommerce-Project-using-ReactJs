@@ -9,3 +9,9 @@ use isInvalid={true} this will highlight the text box in red color
 
 
 creating loading spinner while registering
+
+
+login form | create login form step by step
+implemeted login page
+forget password page needs to be implemented
+login page UI created data binding is still pending 
